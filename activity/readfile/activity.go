@@ -48,8 +48,13 @@ func (a *MyActivity) Eval(context activity.Context) (done bool, err error) {
 	}
 fileHandle, err := os.Open(filename)
   if err != nil {
-    log.Fatal("Error opening file.")
+    log.Debugf("Error opening file.")
   }
+	defer func () {
+    if err := fileHandle.Close(); err != nil {
+      panic(err)
+    }
+  }()
 	// Read the file
 	fileBytes, err := ioutil.ReadAll(fileHandle)
 	if err != nil {
