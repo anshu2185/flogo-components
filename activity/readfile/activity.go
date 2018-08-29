@@ -46,9 +46,12 @@ func (a *MyActivity) Eval(context activity.Context) (done bool, err error) {
 		log.Debugf("Error while tryinf to find file: %s", err.Error())
 		return false, err
 	}
-
+fileHandle, err := os.Open(filename)
+  if err != nil {
+    log.Fatal("Error opening file.")
+  }
 	// Read the file
-	fileBytes, err := ioutil.ReadAll(filename)
+	fileBytes, err := ioutil.ReadAll(fileHandle)
 	if err != nil {
 		log.Debugf("Error while reading file: %s\n", err.Error())
 		return false, err
