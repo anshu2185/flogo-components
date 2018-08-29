@@ -48,7 +48,7 @@ func (a *MyActivity) Eval(context activity.Context) (done bool, err error) {
 	}
 
 	// Read the file
-	fileBytes, err := ioutil.ReadFile(filename)
+	fileBytes, err := ioutil.ReadAll(filename)
 	if err != nil {
 		log.Debugf("Error while reading file: %s\n", err.Error())
 		return false, err
